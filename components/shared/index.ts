@@ -7,3 +7,4 @@ export * from "./top-bar";
 export * from "./filter-checkbox";
 export * from "./filters";
 export * from "./range-slider";
+export * from "./checkbox-filters-group";
