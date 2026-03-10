@@ -8,3 +8,5 @@ export * from "./filter-checkbox";
 export * from "./filters";
 export * from "./range-slider";
 export * from "./checkbox-filters-group";
+export * from "./product-card";
+export * from "./products-group-list";
