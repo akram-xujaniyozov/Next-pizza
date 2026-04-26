@@ -2,7 +2,8 @@ import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/client";
-import { hashSync } from "bcrypt";
+
+import { users, categories, ingredients } from "./constants";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 const pool = new Pool({ connectionString });
@@ -11,22 +12,15 @@ const prisma = new PrismaClient({ adapter });
 
 async function up() {
   await prisma.user.createMany({
-    data: [
-      {
-        fullName: "User Test",
-        email: "user@gmail.com",
-        password: hashSync("111111", 10),
-        role: "USER",
-        verified: new Date(),
-      },
-      {
-        fullName: "Admin Test",
-        email: "admin@gmail.com",
-        password: hashSync("222222", 10),
-        role: "ADMIN",
-        verified: new Date(),
-      },
-    ],
+    data: users,
+  });
+
+  await prisma.category.createMany({
+    data: categories,
+  });
+
+  await prisma.ingredient.createMany({
+    data: ingredients,
   });
 }
 
