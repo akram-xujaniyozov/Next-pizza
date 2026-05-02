@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { Prisma, PrismaClient } from "@/generated/client";
+import { Prisma, PrismaClient } from "@/prisma/generated/client";
 
 import { users, categories, _ingredients, products } from "./constants";
 

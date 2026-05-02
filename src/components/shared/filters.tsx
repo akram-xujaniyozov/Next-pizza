@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Title } from "./title";
-import { FilterCheckbox } from "./filter-checkbox";
-import { CheckboxFiltersGroup } from "./checkbox-filters-group";
+import { FilterCheckbox, CheckboxFiltersGroup } from "@/components/shared";
 import { Input, RangeSlider } from "@/components/ui";
 
 type Props = {

@@ -3,9 +3,7 @@
 import * as React from "react";
 import { useIntersection } from "react-use";
 import { useCategoryStore } from "@/store";
-
 import { ProductCard, Title } from "@/components/shared";
-
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -16,7 +14,7 @@ type Props = {
   listClassName?: string;
 };
 
-export const ProductsGroupLits: React.FC<Props> = ({
+export const ProductsGroupList: React.FC<Props> = ({
   title,
   items,
   categoryId,

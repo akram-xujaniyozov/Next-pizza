@@ -1,11 +1,12 @@
-export * from "./container";
-export * from "./header";
-export * from "./title";
-export * from "./sort-popup";
-export * from "./top-bar";
-export * from "./filter-checkbox";
-export * from "./checkbox-filters-group";
-export * from "./product-card";
-export * from "./filters";
-export * from "./products-group-list";
-export * from "./categories";
+export { Container } from "./container";
+export { Header } from "./header";
+export { Title } from "./title";
+export { SortPopup } from "./sort-popup";
+export { TopBar } from "./top-bar";
+export { FilterCheckbox } from "./filter-checkbox";
+export { ProductCard } from "./product-card";
+export { Filters } from "./filters";
+export { Categories } from "./categories"; // use client
+export { CheckboxFiltersGroup } from "./checkbox-filters-group"; // use client
+export { ProductsGroupList } from "./products-group-list"; // use client
+export { SearchInput } from "./search-input"; // use client

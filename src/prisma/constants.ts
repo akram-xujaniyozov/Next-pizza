@@ -1,5 +1,5 @@
 import { hashSync } from "bcrypt";
-import { UserRole } from "@/generated/client";
+import { UserRole } from "@/prisma/generated/client";
 
 export const users = [
   {

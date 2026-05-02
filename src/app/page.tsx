@@ -3,7 +3,7 @@ import {
   Title,
   TopBar,
   Filters,
-  ProductsGroupLits,
+  ProductsGroupList,
 } from "@/components/shared";
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
           </div>
           <div className="flex-1">
             <div className="flex flex-col gap-16">
-              <ProductsGroupLits
+              <ProductsGroupList
                 title="Пиццы"
                 categoryId={1}
                 items={[
@@ -82,7 +82,7 @@ export default function Home() {
                   },
                 ]}
               />
-              <ProductsGroupLits
+              <ProductsGroupList
                 title="Комбо"
                 categoryId={2}
                 items={[
