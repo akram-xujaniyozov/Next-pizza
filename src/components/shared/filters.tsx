@@ -1,13 +1,23 @@
+"use client";
+
 import * as React from "react";
 import { Title } from "./title";
 import { FilterCheckbox, CheckboxFiltersGroup } from "@/components/shared";
 import { Input, RangeSlider } from "@/components/ui";
+import { useIngredients } from "@/hooks";
 
 type Props = {
   className?: string;
 };
 
 export const Filters: React.FC<Props> = ({ className }) => {
+  const { ingredients, loading, selectedIds, toggleId } = useIngredients();
+
+  const items = ingredients.map((item) => ({
+    value: String(item.id),
+    text: item.name,
+  }));
+
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -28,88 +38,17 @@ export const Filters: React.FC<Props> = ({ className }) => {
           <Input type="number" placeholder="30000" min={100} max={30000} />
         </div>
         <RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
-        <CheckboxFiltersGroup
-          className="mt-5"
-          title="Формат"
-          limit={6}
-          defaultItems={[
-            {
-              text: "Сырный соус",
-              value: "1",
-            },
-            {
-              text: "Моццарелла",
-              value: "2",
-            },
-            {
-              text: "Чеснок",
-              value: "3",
-            },
-            {
-              text: "Солённые огурчики",
-              value: "4",
-            },
-            {
-              text: "Красный лук",
-              value: "5",
-            },
-            {
-              text: "Томаты",
-              value: "6",
-            },
-          ]}
-          items={[
-            {
-              text: "Сырный соус",
-              value: "1",
-            },
-            {
-              text: "Моццарелла",
-              value: "2",
-            },
-            {
-              text: "Чеснок",
-              value: "3",
-            },
-            {
-              text: "Солённые огурчики",
-              value: "4",
-            },
-            {
-              text: "Красный лук",
-              value: "5",
-            },
-            {
-              text: "Томаты",
-              value: "6",
-            },
-            {
-              text: "Сырный соус",
-              value: "1",
-            },
-            {
-              text: "Моццарелла",
-              value: "2",
-            },
-            {
-              text: "Чеснок",
-              value: "3",
-            },
-            {
-              text: "Солённые огурчики",
-              value: "4",
-            },
-            {
-              text: "Красный лук",
-              value: "5",
-            },
-            {
-              text: "Томаты",
-              value: "6",
-            },
-          ]}
-        />
       </div>
+      <CheckboxFiltersGroup
+        className="mt-5"
+        title="Ингредиенты"
+        limit={6}
+        loading={loading}
+        defaultItems={items}
+        items={items}
+        onClickCheckbox={toggleId}
+        selectedIds={selectedIds}
+      />
     </div>
   );
 };
