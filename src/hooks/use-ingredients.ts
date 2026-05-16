@@ -7,14 +7,11 @@ import type { Ingredient } from "@/prisma/generated/client";
 interface ReturnValues {
   ingredients: Ingredient[];
   loading: boolean;
-  selectedIds: Set<string>;
-  toggleId: (id: string) => void;
 }
 
 export const useIngredients = (): ReturnValues => {
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
   const [loading, setLoading] = React.useState(false);
-  const [selectedIds, { toggle }] = useSet(new Set<string>());
 
   React.useEffect(() => {
     const fetchIngredients = async () => {
@@ -32,5 +29,5 @@ export const useIngredients = (): ReturnValues => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, loading, selectedIds, toggleId: toggle };
+  return { ingredients, loading };
 };
