@@ -5,6 +5,8 @@ export { SortPopup } from "./sort-popup";
 export { TopBar } from "./top-bar";
 export { FilterCheckbox } from "./filter-checkbox";
 export { ProductCard } from "./product-card";
+export { ProductImage } from "./product-image";
+export { GroupVariants } from "./group-variants"; // use client
 export { Filters } from "./filters"; // use client
 export { Categories } from "./categories"; // use client
 export { CheckboxFiltersGroup } from "./checkbox-filters-group"; // use client
