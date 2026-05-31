@@ -1,5 +1,4 @@
 import React from "react";
-import { useSet } from "react-use";
 
 import { Api } from "@/services/api-client";
 import type { Ingredient } from "@/prisma/generated/client";
