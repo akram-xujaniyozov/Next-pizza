@@ -2,19 +2,20 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import type { Product } from "@/prisma/generated/client";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import type { ProductWithRelations } from "@/@types/prisma";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui";
+import { ChooseProductForm, ChoosePizzaForm } from "@/components/shared";
 import { cn } from "@/lib/utils";
-import { ChooseProductForm } from "@/components/shared";
 
 interface Props {
-  product: Product;
+  product: ProductWithRelations;
   className?: string;
 }
 
 export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   const router = useRouter();
+  const isPizzaForm = Boolean(product?.items[0].pizzaType);
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -25,13 +26,22 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
         )}
       >
         <VisuallyHidden.Root>
-          <DialogTitle></DialogTitle>
+          <DialogTitle />
         </VisuallyHidden.Root>
-        <ChooseProductForm
-          imageUrl={product.imageUrl}
-          name={product.name}
-          price={350}
-        />
+        {isPizzaForm ? (
+          <ChoosePizzaForm
+            imageUrl={product.imageUrl}
+            name={product.name}
+            ingredients={product.ingredients}
+            items={product.items}
+          />
+        ) : (
+          <ChooseProductForm
+            imageUrl={product.imageUrl}
+            name={product.name}
+            price={350}
+          />
+        )}
       </DialogContent>
     </Dialog>
   );

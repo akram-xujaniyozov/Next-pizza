@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.7.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 Prisma.prismaVersion = {
-  client: "7.7.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -231,8 +231,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.7.0",
-  "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
+  "clientVersion": "7.8.0",
+  "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id Int @id @default(autoincrement())\n\n  fullName String\n  email    String   @unique\n  password String\n  role     UserRole @default(USER)\n  verified DateTime\n\n  provider   String?\n  providerId String?\n\n  cart             Cart?\n  orders           Order[]\n  verificationCode VerificationCode?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Product {\n  id Int @id @default(autoincrement())\n\n  name     String\n  imageUrl String\n\n  ingredients Ingredient[]\n  items       ProductItem[]\n\n  category   Category @relation(fields: [categoryId], references: [id])\n  categoryId Int\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel ProductItem {\n  id Int @id @default(autoincrement())\n\n  price     Int\n  size      Int?\n  pizzaType Int?\n\n  cartItems CartItem[]\n\n  product   Product @relation(fields: [productId], references: [id])\n  productId Int\n}\n\nmodel Ingredient {\n  id       Int    @id @default(autoincrement())\n  name     String\n  price    Int\n  imageUrl String\n\n  products  Product[]\n  cartItems CartItem[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Cart {\n  id Int @id @default(autoincrement())\n\n  user   User? @relation(fields: [userId], references: [id])\n  userId Int?  @unique\n\n  items CartItem[]\n\n  token String @unique\n\n  totalAmount Int @default(0)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel CartItem {\n  id Int @id @default(autoincrement())\n\n  productItem   ProductItem @relation(fields: [productItemId], references: [id])\n  productItemId Int\n\n  cart   Cart @relation(fields: [cartId], references: [id])\n  cartId Int\n\n  quantity Int\n\n  ingredients Ingredient[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Order {\n  id Int @id @default(autoincrement())\n\n  user   User? @relation(fields: [userId], references: [id])\n  userId Int?\n\n  token String\n\n  totalAmount String\n  status      OrderStatus\n  paymentId   String?\n\n  items Json\n\n  fullName String\n  email    String\n  phone    String\n  address  String\n  comment  String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel VerificationCode {\n  id Int @id @default(autoincrement())\n\n  user   User @relation(fields: [userId], references: [id])\n  userId Int  @unique\n\n  code String @unique\n\n  createdAt DateTime @default(now())\n\n  @@unique([userId, code])\n}\n\nenum OrderStatus {\n  PENDING\n  SUCCEEDED\n  CANCELLED\n}\n\nenum UserRole {\n  USER\n  ADMIN\n}\n"
 }
