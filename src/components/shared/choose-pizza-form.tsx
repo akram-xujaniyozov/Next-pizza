@@ -1,5 +1,5 @@
 import React from "react";
-import { Ingredient, ProductItem } from "@/prisma/generated/client";
+import type { Ingredient, ProductItem } from "@/prisma/generated/client";
 import { cn } from "@/lib/utils";
 import { PizzaImage, Title } from "@/components/shared";
 import { Button } from "@/components/ui";
@@ -16,8 +16,8 @@ interface Props {
 
 export const ChoosePizzaForm: React.FC<Props> = ({
   name,
-  items,
   imageUrl,
+  items,
   ingredients,
   loading,
   onSubmit,
