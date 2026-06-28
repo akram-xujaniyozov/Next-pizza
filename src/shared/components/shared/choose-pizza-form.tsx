@@ -4,6 +4,7 @@ import { cn } from '@/shared/lib/utils'
 import { GroupVariants, PizzaImage, Title, IngredientItem } from '@/shared/components/shared'
 import { Button } from '@/shared/components/ui'
 import { pizzaSizes, pizzaTypes, type PizzaSize, type PizzaType } from '@/shared/constants'
+import { useSet } from 'react-use'
 
 interface Props {
   imageUrl: string
@@ -26,6 +27,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 }) => {
   const [size, setSize] = React.useState<PizzaSize>(20)
   const [type, setType] = React.useState<PizzaType>(1)
+
+  const [selectedIngredients, { toggle: toggleIngredient }] = useSet(new Set<number>([]))
 
   const textDetaills = '30 см, традиционное тесто, 620 г'
   const totalPrice = 350
@@ -60,6 +63,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
                 imageUrl={ingredient.imageUrl}
                 name={ingredient.name}
                 price={ingredient.price}
+                onClick={() => toggleIngredient(ingredient.id)}
+                active={selectedIngredients.has(ingredient.id)}
               />
             ))}
           </div>
