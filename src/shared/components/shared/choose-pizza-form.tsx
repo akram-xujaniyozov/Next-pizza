@@ -1,10 +1,10 @@
 import React from 'react'
+import { useSet } from 'react-use'
 import type { Ingredient, ProductItem } from '@/prisma/generated/client'
 import { cn } from '@/shared/lib/utils'
 import { GroupVariants, PizzaImage, Title, IngredientItem } from '@/shared/components/shared'
 import { Button } from '@/shared/components/ui'
 import { pizzaSizes, pizzaTypes, type PizzaSize, type PizzaType } from '@/shared/constants'
-import { useSet } from 'react-use'
 
 interface Props {
   imageUrl: string
