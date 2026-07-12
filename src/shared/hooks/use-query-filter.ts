@@ -1,11 +1,13 @@
-import { useRouter } from "next/navigation";
-import React from "react";
-import qs from "qs";
-import type { Filters } from "./use-filters";
+'use client'
+
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import qs from 'qs'
+import type { Filters } from '@/shared/hooks/use-filters'
 
 export const useQueryFilters = (filters: Filters) => {
-  const router = useRouter();
-  const isMounted = React.useRef(false);
+  const router = useRouter()
+  const isMounted = React.useRef(false)
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -14,12 +16,12 @@ export const useQueryFilters = (filters: Filters) => {
         pizzaTypes: Array.from(filters.pizzaTypes),
         sizes: Array.from(filters.sizes),
         ingredients: Array.from(filters.selectedIngredients),
-      };
+      }
 
-      const query = qs.stringify(params, { arrayFormat: "comma" });
+      const query = qs.stringify(params, { arrayFormat: 'comma' })
 
-      router.push(`?${query}`, { scroll: false });
+      router.push(`?${query}`, { scroll: false })
     }
-    isMounted.current = true;
-  }, [filters]);
-};
+    isMounted.current = true
+  }, [filters])
+}
