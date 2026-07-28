@@ -7,6 +7,7 @@ export { FilterCheckbox } from './filter-checkbox'
 export { ProductCard } from './product-card'
 export { PizzaImage } from './pizza-image'
 export { IngredientItem } from './ingredient-item'
+export { CartButton } from './cart-button'
 export { GroupVariants } from './group-variants' // use client
 export { Filters } from './filters' // use client
 export { Categories } from './categories' // use client
