@@ -1,10 +1,10 @@
+'use client'
+
 import React from 'react'
 import {
   Button,
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -12,24 +12,48 @@ import {
 } from '@/shared/components/ui'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { CartDrawerItem } from '@/shared/components/shared'
+import { getCartItemDetails } from '@/shared/lib'
+import { useCartStore } from '@/shared/store'
+import type { PizzaSize, PizzaType } from '@/shared/constants/pizza'
 
 type Props = {
   className?: string
 }
 
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children, className }) => {
+  const { totalAmount, items, fetchCartItems } = useCartStore((state) => state)
+
+  React.useEffect(() => {
+    fetchCartItems()
+  }, [])
+
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="flex flex-col justify-between pb-0 bg-[#f4f1ee]">
         <SheetHeader>
           <SheetTitle>
-            В корзине <span className="font-bold">{3} товара</span>
+            В корзине <span className="font-bold">{items.length} товара</span>
           </SheetTitle>
         </SheetHeader>
-
-        {/* Items */}
-
+        <div className="-mx-6 mt-5 overflow-auto flex-1">
+          {items.map((item) => (
+            <CartDrawerItem
+              id={item.id}
+              quantity={item.quantity}
+              imageUrl={item.imageUrl}
+              name={item.name}
+              price={item.price}
+              details={getCartItemDetails(
+                item.ingredients,
+                item.pizzaType as PizzaType,
+                item.pizzaSize as PizzaSize,
+              )}
+              className="mb-2"
+            />
+          ))}
+        </div>
         <SheetFooter className="-mx-6 bg-white p-8">
           <div className="w-full">
             <div className="flex mb-4">
