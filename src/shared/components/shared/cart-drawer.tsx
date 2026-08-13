@@ -22,11 +22,18 @@ type Props = {
 }
 
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children, className }) => {
-  const { totalAmount, items, fetchCartItems } = useCartStore((state) => state)
+  const { totalAmount, items, fetchCartItems, updateItemQuantity, removeCartItem } = useCartStore(
+    (state) => state,
+  )
 
   React.useEffect(() => {
     fetchCartItems()
   }, [])
+
+  const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
+    updateItemQuantity(id, newQuantity)
+  }
 
   return (
     <Sheet>
@@ -34,12 +41,13 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
       <SheetContent className="flex flex-col justify-between pb-0 bg-[#f4f1ee]">
         <SheetHeader>
           <SheetTitle>
-            В корзине <span className="font-bold">{items.length} товара</span>
+            В корзине <span className="font-bold">{items.length || 0} товара</span>
           </SheetTitle>
         </SheetHeader>
         <div className="-mx-6 mt-5 overflow-auto flex-1">
           {items.map((item) => (
             <CartDrawerItem
+              key={item.id}
               id={item.id}
               quantity={item.quantity}
               imageUrl={item.imageUrl}
@@ -50,6 +58,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                 item.pizzaType as PizzaType,
                 item.pizzaSize as PizzaSize,
               )}
+              onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+              onClickRemove={() => removeCartItem(item.id)}
               className="mb-2"
             />
           ))}
@@ -62,7 +72,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                 <span className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
               </p>
 
-              <span className="font-bold text-lg">{500} ₽</span>
+              <span className="font-bold text-lg">{totalAmount} ₽</span>
             </div>
 
             <Link href="/checkout">

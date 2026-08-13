@@ -17,6 +17,9 @@ interface Props {
   className?: string
 }
 
+/**
+ * Форма выбора ПИЦЦЫ
+ */
 export const ChoosePizzaForm: React.FC<Props> = ({
   name,
   imageUrl,

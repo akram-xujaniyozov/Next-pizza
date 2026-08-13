@@ -1,17 +1,20 @@
-import React from "react";
-import { Title } from "@/shared/components/shared";
-import { Button } from "@/shared/components/ui";
-import { cn } from "@/shared/lib/utils";
+import React from 'react'
+import { Title } from '@/shared/components/shared'
+import { Button } from '@/shared/components/ui'
+import { cn } from '@/shared/lib/utils'
 
 interface Props {
-  imageUrl: string;
-  name: string;
-  price: number;
-  loading?: boolean;
-  onSubmit?: VoidFunction;
-  className?: string;
+  imageUrl: string
+  name: string
+  price: number
+  onSubmit: VoidFunction
+  loading?: boolean
+  className?: string
 }
 
+/**
+ * Форма выбора ПРОДУКТА
+ */
 export const ChooseProductForm: React.FC<Props> = ({
   name,
   imageUrl,
@@ -21,7 +24,7 @@ export const ChooseProductForm: React.FC<Props> = ({
   loading,
 }) => {
   return (
-    <div className={cn(className, "flex flex-1")}>
+    <div className={cn(className, 'flex flex-1')}>
       <div className="flex items-center justify-center flex-1 relative w-full">
         <img
           src={imageUrl}
@@ -34,12 +37,13 @@ export const ChooseProductForm: React.FC<Props> = ({
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <Button
-          onClick={() => onSubmit?.()}
+          loading={loading}
+          onClick={onSubmit}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >
           Добавить в корзину за {price} ₽
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
