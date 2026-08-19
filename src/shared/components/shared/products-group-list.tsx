@@ -1,18 +1,19 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { useIntersection } from "react-use";
-import { useCategoryStore } from "@/shared/store";
-import { ProductCard, Title } from "@/shared/components/shared";
-import { cn } from "@/shared/lib/utils";
+import * as React from 'react'
+import { useIntersection } from 'react-use'
+import { useCategoryStore } from '@/shared/store'
+import { ProductCard, Title } from '@/shared/components/shared'
+import { cn } from '@/shared/lib/utils'
+import type { ProductWithRelations } from '@/@types/prisma'
 
 type Props = {
-  title: string;
-  items: any[];
-  categoryId: number;
-  className?: string;
-  listClassName?: string;
-};
+  title: string
+  items: ProductWithRelations[]
+  categoryId: number
+  className?: string
+  listClassName?: string
+}
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
@@ -21,35 +22,33 @@ export const ProductsGroupList: React.FC<Props> = ({
   className,
   listClassName,
 }) => {
-  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
-  const intersectionRef = React.useRef<HTMLDivElement>(null);
-  const intersection = useIntersection(
-    intersectionRef as React.RefObject<HTMLDivElement>,
-    {
-      threshold: 0.4,
-    },
-  );
+  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId)
+  const intersectionRef = React.useRef<HTMLDivElement>(null)
+  const intersection = useIntersection(intersectionRef as React.RefObject<HTMLDivElement>, {
+    threshold: 0.4,
+  })
 
   React.useEffect(() => {
     if (intersection?.isIntersecting) {
-      setActiveCategoryId(categoryId);
+      setActiveCategoryId(categoryId)
     }
-  }, [title, categoryId, intersection?.isIntersecting]);
+  }, [title, categoryId, intersection?.isIntersecting])
 
   return (
     <div id={title} ref={intersectionRef} className={className}>
       <Title text={title} size="lg" className="font-extrabold mb-5" />
-      <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
+      <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
         {items.map((product, i) => (
           <ProductCard
-            key={i}
+            key={product.id}
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
             price={product.items[0].price}
+            ingredients={product.ingredients}
           />
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

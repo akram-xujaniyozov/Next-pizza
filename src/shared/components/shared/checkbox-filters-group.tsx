@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { FilterCheckbox, FilterChecboxProps } from "./filter-checkbox";
-import { Input, Skeleton } from "@/shared/components/ui";
+import * as React from 'react'
+import { FilterCheckbox, FilterChecboxProps } from './filter-checkbox'
+import { Input, Skeleton } from '@/shared/components/ui'
 
-type Item = FilterChecboxProps;
+type Item = FilterChecboxProps
 
 interface Props {
-  title: string;
-  items: Item[];
-  defaultItems?: Item[];
-  limit?: number;
-  loading?: boolean;
-  searchInputPlaceholder?: string;
-  className?: string;
-  onClickCheckbox?: (id: string) => void;
-  selected?: Set<string>;
-  defaultValue?: string[];
-  name?: string;
+  title: string
+  items: Item[]
+  defaultItems?: Item[]
+  limit?: number
+  loading?: boolean
+  searchInputPlaceholder?: string
+  className?: string
+  onClickCheckbox?: (id: string) => void
+  selected?: Set<string>
+  defaultValue?: string[]
+  name?: string
 }
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
@@ -26,24 +26,22 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   defaultItems,
   limit = 5,
   loading = false,
-  searchInputPlaceholder = "Поиск...",
+  searchInputPlaceholder = 'Поиск...',
   className,
   onClickCheckbox,
   selected,
-  defaultValue,
   name,
+  defaultValue,
 }) => {
-  const [showAll, setShowAll] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState("");
+  const [showAll, setShowAll] = React.useState(false)
+  const [searchValue, setSearchValue] = React.useState('')
 
   const list = showAll
-    ? items.filter((item) =>
-        item.text.toLowerCase().includes(searchValue.toLowerCase()),
-      )
-    : (defaultItems || items).slice(0, limit);
+    ? items.filter((item) => item.text.toLowerCase().includes(searchValue.toLowerCase()))
+    : (defaultItems || items).slice(0, limit)
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchValue(e.target.value);
+    setSearchValue(e.target.value)
 
   if (loading) {
     return (
@@ -56,7 +54,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 
         <Skeleton className="w-28 h-6 mb-4 rounded-[8px]" />
       </div>
-    );
+    )
   }
 
   return (
@@ -87,15 +85,12 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         ))}
       </div>
       {items.length > limit && (
-        <div className={showAll ? "border-t border-t-neutral-100 mt-4" : ""}>
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="text-primary mt-3"
-          >
-            {showAll ? "Скрыть" : "+ Показать все"}
+        <div className={showAll ? 'border-t border-t-neutral-100 mt-4' : ''}>
+          <button onClick={() => setShowAll(!showAll)} className="text-primary mt-3">
+            {showAll ? 'Скрыть' : '+ Показать все'}
           </button>
         </div>
       )}
     </div>
-  );
-};
+  )
+}

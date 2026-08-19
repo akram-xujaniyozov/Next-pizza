@@ -5,7 +5,7 @@ import { findOrCreateCart } from '@/shared/lib/find-or-create-cart'
 import type { CreateCartItemValues } from '@/shared/services/dto/cart.dto'
 import { updateCartTotalAmount } from '@/shared/lib/update-cart-total-amount'
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   try {
     const token = req.cookies.get('cartToken')?.value
 
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   try {
     let token = req.cookies.get('cartToken')?.value
 
