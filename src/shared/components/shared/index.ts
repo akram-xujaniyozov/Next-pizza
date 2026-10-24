@@ -22,7 +22,12 @@ export { ErrorText } from './error-text'
 export { ClearButton } from './clear-button'
 export { RequiredSymbol } from './required-symbol'
 export { AddressInput } from './address-input'
+export { InfoBlock } from './info-block'
 export * from './modals'
+export * from './email-templates';
+export * from './checkout';
+export * from './form';
+export * from './modals';
 export { GroupVariants } from './group-variants' // use client
 export { ProductForm } from './product-form' // use client
 export { Filters } from './filters' // use client
@@ -30,3 +35,4 @@ export { Categories } from './categories' // use client
 export { CheckboxFiltersGroup } from './checkbox-filters-group' // use client
 export { ProductsGroupList } from './products-group-list' // use client
 export { SearchInput } from './search-input' // use client
+export { ProfileForm } from './profile-form' // use client

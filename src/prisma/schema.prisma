@@ -14,7 +14,7 @@ model User {
   email String @unique
   password String 
   role UserRole @default(USER)
-  verified DateTime
+  verified DateTime?
   
   provider String?
   providerId String?
@@ -118,7 +118,7 @@ model Order {
 
   token String
 
-  totalAmount String
+  totalAmount Int
   status OrderStatus
   paymentId String?
 

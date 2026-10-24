@@ -5,5 +5,8 @@ export * from './calc-total-pizza-price'
 export * from './get-cart-details'
 export * from './get-cart-item-details'
 export * from './calc-cart-item-total-price'
+export * from "./send-email"
+export * from './create-click-payment'
+export * from './create-payment'
 // export * from './find-or-create-cart'
 // export * from './update-cart-total-amount'
